@@ -1,4 +1,5 @@
-CC=clang
+CC=cc
+
 FLAGS=-g -Wall -pedantic -Wextra -Wconversion\
 	-Waggregate-return -Wcast-align -Wcast-qual -Wchar-subscripts\
 	-Wdisabled-optimization -Wimplicit -Wimport -Winline\
