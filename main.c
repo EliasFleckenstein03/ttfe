@@ -39,7 +39,7 @@ void init_board(board *b) {
 }
 
 void game_start() {
-	printf("\e[?1049h");
+	printf("\e[?1049h\e[?25l]");
 	struct termios oldtio, newtio;
 	tcgetattr(STDIN_FILENO, &oldtio);
 	newtio = oldtio;
@@ -49,7 +49,7 @@ void game_start() {
 	game_loop(b);
 	print_score(b);
 	free_board(b);
-	printf("\e[?1049l");
+	printf("\e[?1049l\e[?25h");
 	tcsetattr(STDIN_FILENO, TCSANOW, &oldtio);
 }
 
