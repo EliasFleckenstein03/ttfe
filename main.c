@@ -408,7 +408,7 @@ void print_board_line(board *b, int l) {
 }
 
 void print_board(board *b) {
-	printf("\e[1J\e[0;0H");
+	printf("\e[2J\e[0;0H");
 	printf("Score: %u\n", b->points);
 	print_sep();
 	for(int i = 0; i < 4; ++i) {
