@@ -448,7 +448,7 @@ void print_board(board *b) {
 }
 
 void print_score(board *b) {
-	printf("Game Over\nScore:%u\n", b->points);
+	printf("\e[1m\e[91mGame Over\e[0m\n\e[1mScore: \e[0m%u\n", b->points);
 }
 
 void merge_test1() {
