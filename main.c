@@ -429,16 +429,35 @@ void print_sep(const char *left, const char *right, const char *cross, const cha
 	printf("\n");
 }
 
+uint mylog2(uint n) {
+	uint i;
+
+	for (i = 0; ! (n & 1); i++)
+		n >>= 1;
+
+	return i;
+}
+
 void print_board_line(board *b, int l) {
 	printf("\u2503");
 
 	for(int i = 0; i < 4; i++) {
 		uint n = b->x[i][l];
 
-		if(n == 0)
+		if(n == 0) {
 			printf("      ");
-		else
+		} else {
+			uint c = mylog2(n);
+
+			if (c > 6) {
+				c -= 6;
+				printf("\e[1m");
+			}
+
+			printf("\e[3%1um", c);
 			center_print(n, 6);
+			printf("\e[0m");
+		}
 
 		if(i == 3)
 			printf("\u2503");
