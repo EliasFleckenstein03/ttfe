@@ -47,10 +47,10 @@ void game_start() {
 	tcsetattr(STDIN_FILENO, TCSANOW, &newtio);
 	board *b = new_board();
 	game_loop(b);
-	print_score(b);
-	free_board(b);
 	printf("\e[?1049l\e[?25h");
 	tcsetattr(STDIN_FILENO, TCSANOW, &oldtio);
+	print_score(b);
+	free_board(b);
 }
 
 enum direction get_input()
