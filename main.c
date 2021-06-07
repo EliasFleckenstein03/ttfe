@@ -414,7 +414,23 @@ void print_sep(const char *left, const char *right, const char *cross, const cha
 }
 
 void print_board_line(board *b, int l) {
-	printf("\u2503%4u\u2502%4u\u2502%4u\u2502%4u\u2503\n", b->x[0][l], b->x[1][l], b->x[2][l], b->x[3][l]);
+	printf("\u2503");
+
+	for(int i = 0; i < 4; i++) {
+		uint n = b->x[i][l];
+
+		if(n == 0)
+			printf("    ");
+		else
+			printf("%4u", n);
+
+		if(i == 3)
+			printf("\u2503");
+		else
+			printf("\u2502");
+	}
+
+	printf("\n");
 
 	if(l == 3)
 		print_sep("\u2517", "\u251B", "\u2537", "\u2501");
