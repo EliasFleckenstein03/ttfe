@@ -399,6 +399,22 @@ void merge_west(board *b) {
 	}
 }
 
+void center_print(uint n, int width)
+{
+    char s[20] = {'\0'};
+    int len;
+    sprintf(s, "%u", n);
+    len = strlen(s);
+    if (len >= width)  {
+        printf("%s", s);
+    } else {
+        int remaining = width - len;
+        int spaces_right = remaining / 2;
+        int spaces_left = remaining - spaces_right;
+        printf("%*s%s%*s", spaces_left, "", s, spaces_right, "");
+    }
+}
+
 void print_sep(const char *left, const char *right, const char *cross, const char *line)
 {
 	printf("%s", left);
@@ -422,7 +438,7 @@ void print_board_line(board *b, int l) {
 		if(n == 0)
 			printf("      ");
 		else
-			printf("%6u", n);
+			center_print(n, 6);
 
 		if(i == 3)
 			printf("\u2503");

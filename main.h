@@ -8,6 +8,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <termios.h>
+#include <string.h>
 
 typedef struct board board;
 typedef unsigned int uint;
