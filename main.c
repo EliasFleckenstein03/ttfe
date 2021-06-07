@@ -399,23 +399,36 @@ void merge_west(board *b) {
 	}
 }
 
-void print_sep() {
-	printf("||--------------------------------------------------------------||\n");
+void print_sep(const char *left, const char *right, const char *cross, const char *line)
+{
+	printf("%s", left);
+	for(int i = 0; i < 4; i++) {
+		for(int j = 0; j < 4; j++)
+			printf("%s", line);
+		if(i == 3)
+			printf("%s", right);
+		else
+			printf("%s", cross);
+	}
+	printf("\n");
 }
 
 void print_board_line(board *b, int l) {
-	printf("||\t%u\t|\t%u\t|\t%u\t|\t%u\t||\n", b->x[0][l], b->x[1][l], b->x[2][l], b->x[3][l]); 
-	print_sep();
+	printf("\u2503%4u\u2502%4u\u2502%4u\u2502%4u\u2503\n", b->x[0][l], b->x[1][l], b->x[2][l], b->x[3][l]);
+
+	if(l == 3)
+		print_sep("\u2517", "\u251B", "\u2537", "\u2501");
+	else
+		print_sep("\u2520", "\u2528", "\u253C", "\u2500");
 }
 
 void print_board(board *b) {
 	printf("\e[2J\e[0;0H");
 	printf("Score: %u\n", b->points);
-	print_sep();
+	print_sep("\u250F", "\u2513", "\u252F", "\u2501");
 	for(int i = 0; i < 4; ++i) {
 		print_board_line(b, i);
 	}
-	printf("\n");
 }
 
 void print_score(board *b) {
