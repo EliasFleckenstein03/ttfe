@@ -1,4 +1,4 @@
 My own toy implementation of 2048 on the command line.
 
-It supports hjkl for movements and q for quit.
+It supports wasd for movements and q for quit.
 

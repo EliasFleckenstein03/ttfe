@@ -56,16 +56,16 @@ void game_loop(board *b) {
 		printf("Make a move:\n");
 		fgets(c, sizeof(c), stdin);
 		switch(c[0]) {
-			case 'h':
+			case 'a':
 				d = west;
 				break;
-			case 'j':
+			case 's':
 				d = south;
 				break;
-			case 'k':
+			case 'w':
 				d = north;
 				break;
-			case 'l':
+			case 'd':
 				d = east;
 				break;
 			case 'q':
