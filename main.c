@@ -386,7 +386,7 @@ void merge_east(board *b) {
 	}
 }
 
-void merge_west(board *b) {	
+void merge_west(board *b) {
 	for(int i = 1; i < 4; ++i) {
 		for(int j = 0; j < 4; ++j) {
 			if(b->x[i][j] != 0 && b->x[i-1][j] == b->x[i][j]) {
@@ -403,7 +403,7 @@ void print_sep(const char *left, const char *right, const char *cross, const cha
 {
 	printf("%s", left);
 	for(int i = 0; i < 4; i++) {
-		for(int j = 0; j < 4; j++)
+		for(int j = 0; j < 6; j++)
 			printf("%s", line);
 		if(i == 3)
 			printf("%s", right);
@@ -420,9 +420,9 @@ void print_board_line(board *b, int l) {
 		uint n = b->x[i][l];
 
 		if(n == 0)
-			printf("    ");
+			printf("      ");
 		else
-			printf("%4u", n);
+			printf("%6u", n);
 
 		if(i == 3)
 			printf("\u2503");
@@ -431,6 +431,7 @@ void print_board_line(board *b, int l) {
 	}
 
 	printf("\n");
+	print_sep("\u2503", "\u2503", "\u2502", " ");
 
 	if(l == 3)
 		print_sep("\u2517", "\u251B", "\u2537", "\u2501");
