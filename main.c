@@ -39,10 +39,12 @@ void init_board(board *b) {
 }
 
 void game_start() {
+	printf("\e[?1049h");
 	board *b = new_board();
 	game_loop(b);
 	print_score(b);
 	free_board(b);
+	printf("\e[?1049l");
 }
 
 void game_loop(board *b) {
