@@ -40,50 +40,51 @@ void init_board(board *b) {
 
 void game_start() {
 	printf("\e[?1049h");
+	struct termios oldtio, newtio;
+	tcgetattr(STDIN_FILENO, &oldtio);
+	newtio = oldtio;
+	newtio.c_lflag &= ~(ICANON | ECHO);
+	tcsetattr(STDIN_FILENO, TCSANOW, &newtio);
 	board *b = new_board();
 	game_loop(b);
 	print_score(b);
 	free_board(b);
 	printf("\e[?1049l");
+	tcsetattr(STDIN_FILENO, TCSANOW, &oldtio);
+}
+
+enum direction get_input()
+{
+	switch(fgetc(stdin)) {
+		case 'a':
+			return west;
+		case 's':
+			return south;
+		case 'w':
+			return north;
+		case 'd':
+			return east;
+		case 'q':
+			return quit;
+		default:
+			return get_input();
+	}
 }
 
 void game_loop(board *b) {
-	char c[16];
-	int d;
-	bool r = true;
 	while(move_possible_any(b)) {
 		place_new_piece(b);
 		print_board(b);
-		INPUT:
-		printf("Make a move:\n");
-		fgets(c, sizeof(c), stdin);
-		switch(c[0]) {
-			case 'a':
-				d = west;
+		while(true) {
+			enum direction d = get_input();
+
+			if (d == quit) {
+				return;
+			} else if(move_possible(b, d)) {
+				make_move(b, d);
 				break;
-			case 's':
-				d = south;
-				break;
-			case 'w':
-				d = north;
-				break;
-			case 'd':
-				d = east;
-				break;
-			case 'q':
-				r = false;
-				break;
-			default:
-				printf("Invalid move: %c\n", c[0]);
-				goto INPUT;
+			}
 		}
-		if(!r)
-			return;
-		if(!move_possible(b, d)) {
-			printf("Move not possible: %c\n", c[0]);
-			goto INPUT;
-		}
-		make_move(b, d);
 	}
 }
 

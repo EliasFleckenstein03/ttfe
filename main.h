@@ -6,6 +6,8 @@
 #include <stdbool.h>
 #include <assert.h>
 #include <time.h>
+#include <unistd.h>
+#include <termios.h>
 
 typedef struct board board;
 typedef unsigned int uint;
@@ -16,6 +18,7 @@ enum direction {
 	south,
 	west,
 	east,
+	quit,
 };
 
 struct board {
